@@ -112,7 +112,7 @@
       </el-descriptions>
 
       <div class="btns">
-        <el-button @click="resetForm">重置</el-button>
+        <el-button @click="resetForm" size="small">重置</el-button>
       </div>
     </div>
   </div>
@@ -167,8 +167,13 @@ export default {
 }
 .container {
   border: 1px solid #ebebeb;
-  height: 50%;
+  height: auto;
   width: 50%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-radius: 5px;
 }
 .el-descriptions__header {
   line-height: 50px;
@@ -176,6 +181,8 @@ export default {
   padding-left: 16px;
   padding-right: 16px;
   background: #fafafa;
+  border: 1px solid #ebebeb;
+  border-bottom: none;
 }
 
 .btns {
@@ -183,5 +190,10 @@ export default {
   display: flex;
   justify-content: end;
   margin-top: 24px;
+}
+
+.el-input__inner {
+  height: 32px;
+  line-height: 32px;
 }
 </style>
