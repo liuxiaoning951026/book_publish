@@ -1,7 +1,12 @@
 <template>
   <div class="hello">
     <div class="container">
-      <el-descriptions title="书号查询" :column="2" border>
+      <el-descriptions :column="2" border>
+        <template slot="title">
+          <span style="padding-left: 12px; border-left: 2px solid #64739d"
+            >书号查询</span
+          >
+        </template>
         <template slot="extra">
           <el-button type="primary" size="small" icon="el-icon-upload"
             >上传</el-button
@@ -9,7 +14,7 @@
         </template>
 
         <el-descriptions-item label="出版社">
-          <el-input v-model="input1" placeholder="请输入内容"></el-input>
+          <el-input v-model.trim="input1" placeholder="请输入出版社"></el-input>
         </el-descriptions-item>
         <el-descriptions-item
           label="时间"
@@ -20,6 +25,7 @@
             type="datetime"
             placeholder="选择日期时间"
             style="width: 100%"
+            class="timer"
           >
           </el-date-picker
         ></el-descriptions-item>
@@ -27,15 +33,15 @@
         <el-descriptions-item label="">
           <template slot="label">
             <el-input
-              v-model="input3"
+              v-model.trim="input3"
               placeholder="请输入名称"
               style="flex: 1; margin-right: 12px"
             ></el-input>
           </template>
           <div style="display: flex">
             <el-input
-              v-model="input2"
-              placeholder="请输入内容"
+              v-model.trim="input2"
+              placeholder="请输入名称内容"
               style="flex: 1; margin-right: 12px"
             ></el-input>
             <el-button type="primary" size="small" icon="el-icon-search"
@@ -47,10 +53,12 @@
 
       <el-descriptions :column="2" border>
         <template slot="title">
-          <span>2024年{{ input1 }}线上审稿系统</span></template
+          <span style="padding-left: 12px; border-left: 2px solid #64739d"
+            >2024年{{ input1 }}线上审稿系统</span
+          ></template
         >
         <el-descriptions-item label="姓名">
-          <el-input v-model="input4" placeholder="请输入内容"></el-input>
+          <el-input v-model.trim="input4" placeholder="请输入姓名"></el-input>
         </el-descriptions-item>
         <el-descriptions-item label="性别">
           <el-select
@@ -76,11 +84,14 @@
           </el-select>
         </el-descriptions-item>
         <el-descriptions-item label="总数字">
-          <el-input v-model="input5" placeholder="请输入内容"></el-input>
+          <el-input v-model.trim="input5" placeholder="请输入总数字"></el-input>
         </el-descriptions-item>
 
         <el-descriptions-item label="选题名称">
-          <el-input v-model="input6" placeholder="请输入内容"></el-input>
+          <el-input
+            v-model.trim="input6"
+            placeholder="请输入选题名称"
+          ></el-input>
         </el-descriptions-item>
         <el-descriptions-item label="作品上传">
           <el-select
@@ -107,7 +118,10 @@
           ></el-select>
         </el-descriptions-item>
         <el-descriptions-item label="评审结果">
-          <el-input v-model="input7" placeholder="请输入内容"></el-input>
+          <el-input
+            v-model.trim="input7"
+            placeholder="请输入评审结果"
+          ></el-input>
         </el-descriptions-item>
       </el-descriptions>
 
@@ -185,6 +199,11 @@ export default {
   border-bottom: none;
 }
 
+.el-descriptions__title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
 .btns {
   width: 100%;
   display: flex;
@@ -195,5 +214,11 @@ export default {
 .el-input__inner {
   height: 32px;
   line-height: 32px;
+}
+
+.timer {
+  .el-input__icon {
+    line-height: 32px;
+  }
 }
 </style>
