@@ -51,13 +51,16 @@
         </el-descriptions-item>
       </el-descriptions>
 
-      <el-descriptions :column="2" border>
+      <el-descriptions :column="2" border class="des-2">
         <template slot="title">
           <span style="padding-left: 12px; border-left: 2px solid #64739d"
             >2024年{{ input1 }}线上审稿系统</span
           ></template
         >
-        <el-descriptions-item label="姓名">
+        <el-descriptions-item label="">
+          <template slot="label">
+            <span class="nameStr">姓名</span>
+          </template>
           <el-input v-model.trim="input4" placeholder="请输入姓名"></el-input>
         </el-descriptions-item>
         <el-descriptions-item label="性别">
@@ -87,7 +90,10 @@
           <el-input v-model.trim="input5" placeholder="请输入总数字"></el-input>
         </el-descriptions-item>
 
-        <el-descriptions-item label="选题名称">
+        <el-descriptions-item label="">
+          <template slot="label">
+            <span class="nameStr">选题名称</span>
+          </template>
           <el-input
             v-model.trim="input6"
             placeholder="请输入选题名称"
@@ -182,7 +188,7 @@ export default {
 .container {
   border: 1px solid #ebebeb;
   height: auto;
-  width: 50%;
+  width: 90%;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -216,9 +222,24 @@ export default {
   line-height: 32px;
 }
 
-.timer {
-  .el-input__icon {
-    line-height: 32px;
+.el-input__icon {
+  line-height: 32px;
+}
+.el-descriptions-item__label.is-bordered-label {
+  background: #ffffff;
+}
+.des-2 {
+  .el-descriptions__header {
+    border-top: none;
   }
+}
+
+.el-descriptions-item__label.is-bordered-label {
+  color: #000000;
+}
+.nameStr::before {
+  content: "*";
+  color: #f56c6c;
+  margin-right: 4px;
 }
 </style>
