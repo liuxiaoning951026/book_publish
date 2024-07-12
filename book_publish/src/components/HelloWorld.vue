@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello" @click="clickPanel">
     <div class="container">
       <el-descriptions :column="2" border>
         <template slot="title">
@@ -33,17 +33,39 @@
         <el-descriptions-item label="">
           <template slot="label">
             <el-input
-              v-model.trim="input3"
-              placeholder="请输入名称"
-              style="flex: 1; margin-right: 12px"
+              id="input-number-3"
+              v-model.number="input3"
+              placeholder="请输入总数"
+              style="flex: 1; margin-right: 12px; width: 100%"
+              @keyup.native="changeInput3Number($event)"
             ></el-input>
           </template>
-          <div style="display: flex">
+          <div
+            style="
+              display: flex;
+              width: 100%;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
             <el-input
-              v-model.trim="input2"
-              placeholder="请输入名称内容"
-              style="flex: 1; margin-right: 12px"
+              v-show="!isShowText"
+              id="input-number-2"
+              v-model.number="input2"
+              placeholder="请输入已申请书号数量"
+              style="flex: 1; margin-right: 12px; width: 100%"
+              @keyup.native="changeInput2Number($event)"
             ></el-input>
+
+            <div v-show="isShowText" @click.self.stop="clickText">
+              书号：{{ input3 }} &nbsp;&nbsp; 已申请书号：{{
+                input2
+              }}
+              &nbsp;&nbsp; 剩余书号：<span
+                style="color: #409eff; font-size: 16px"
+                >{{ input3 - input2 < 0 ? "0" : input3 - input2 }}</span
+              >
+            </div>
             <el-button type="primary" size="small" icon="el-icon-search"
               >查询</el-button
             >
@@ -150,11 +172,14 @@ export default {
       input5: "",
       input6: "",
       input7: "",
+      input8: "",
+      input9: "",
       timeStr: "",
       selectAex: "",
       selectUploadStatus: "",
       selectReviewStatus: "",
       selectCardType: "",
+      isShowText: false,
     };
   },
   methods: {
@@ -166,11 +191,50 @@ export default {
       this.input5 = "";
       this.input6 = "";
       this.input7 = "";
+      this.input8 = "";
       this.timeStr = "";
       this.selectAex = "";
       this.selectUploadStatus = "";
       this.selectReviewStatus = "";
       this.selectCardType = "";
+      this.isShowText = false;
+    },
+
+    blur() {
+      this.isShowText = true;
+    },
+
+    focus() {
+      this.isShowText = !this.isShowText;
+      console.log("isShowText===", this.isShowText);
+    },
+
+    changeInput3Number(e) {
+      let num = e.target.value;
+      // 只允许输入数字
+      this.input3 = num.replace(/\D/g, "");
+    },
+
+    changeInput2Number(e) {
+      let num = e.target.value;
+      // 只允许输入数字
+      this.input2 = num.replace(/\D/g, "");
+    },
+    clickText() {
+      console.log("dfsd");
+      this.isShowText = !this.isShowText;
+    },
+
+    clickPanel(e) {
+      // const inputNumber3 = document.getElementById("input-number-3"); // 当前元素
+      const inputNumber2 = document.getElementById("input-number-2"); // 当前元素
+      console.log(inputNumber2.contains(e.target));
+      if (!inputNumber2.contains(e.target)) {
+        this.isShowText = !this.isShowText;
+      }
+      // if (!this.isShowText) {
+      //   this.isShowText = true
+      // }
     },
   },
 };
@@ -241,5 +305,11 @@ export default {
   content: "*";
   color: #f56c6c;
   margin-right: 4px;
+}
+.el-input-number__decrease {
+  width: 32px;
+}
+.el-input-number {
+  line-height: 30px;
 }
 </style>
